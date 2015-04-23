@@ -25,6 +25,9 @@ var Snake = {
      **/
       
     get: function(a_dict, a_key, default_value) {
+        if(default_value === undefined) {
+            default_value = null;
+        }
         if (typeof(a_dict[a_key]) != 'undefined') {
             return a_dict[a_key];
         } else {
@@ -86,7 +89,7 @@ var Snake = {
         if (!mixed_input) {
             return '';
         } else {
-            return mized_input.toString();
+            return mixed_input.toString();
         }
     },
     
@@ -107,18 +110,37 @@ var Snake = {
     
     /**
      * Converts any value to float if possible, or given default value if not
-     * @param mixed mixed_input - Input value
-     * @param integer default_value - Default return value if input can't be converted to float, defaults to zero
-     * @returns float - Converted value
+     * @param {mixed} mixed_input - Input value
+     * @param {integer} default_value - Default return value if input can't be converted to float, defaults to zero
+     * @returns {float} - Converted value
      **/    
     _float: function(mixed_input,default_value) {
-        var conv = parseFloat(str(mixed_input).replace(',', '.'));
+        var conv = parseFloat(this.str(mixed_input).replace(',', '.'));
             if(isNaN(conv)) {
             return default_value || 0;
         }
         return conv;
-    }
-
+    },
+    
+    /**
+     * Returns minimal value from array
+     * @param {array} a_list - Array to analyze
+     * @returns {float} - Minimal value
+     */
+     
+     min: function(a_list) {
+         return Math.min.apply( Math, a_list );
+     },
+     
+    /**
+     * Returns maximal value from array
+     * @param {array} a_list - Array to analyze
+     * @returns {float} - Maximal value
+     */
+     
+     max: function(a_list) {
+          return Math.max.apply( Math, a_list );
+     }
 }
 
 if (typeof(window['S'] == 'undefined')) {
